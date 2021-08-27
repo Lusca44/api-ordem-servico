@@ -1,5 +1,6 @@
 package com.lucas.orderService.domain;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 import javax.persistence.Entity;
@@ -10,8 +11,9 @@ import javax.persistence.Id;
 import org.hibernate.validator.constraints.br.CPF;
 
 @Entity
-public abstract class Pessoa {
-
+public abstract class Pessoa implements Serializable{
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
