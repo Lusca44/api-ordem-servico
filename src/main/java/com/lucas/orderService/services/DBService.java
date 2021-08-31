@@ -26,9 +26,9 @@ public class DBService {
 
 	public void instanciaDB() {
 
-		Tecnico t1 = new Tecnico(null, "Lucas Santos", "370.067.500-32", "(21) 97569-4934");
-		Tecnico t2 = new Tecnico(null, "Alvinho cocudo", "285.645.170-51", "(21) 97569-4934");
-		Cliente c1 = new Cliente(null, "Gabriela Penaforte", "180.195.750-90", "(21) 97569-4934");
+		Tecnico t1 = new Tecnico(null, "Lucas Santos", "370.067.500-32", "(21) 97569-4931");
+		Tecnico t2 = new Tecnico(null, "Alvinho cocudo", "285.645.170-51", "(21) 97569-4932");
+		Cliente c1 = new Cliente(null, "Gabriela Penaforte", "180.195.750-90", "(21) 97569-4933");
 
 		OrdemServico os = new OrdemServico(null, Prioridade.ALTA, "Teste mock dados", Status.ABERTO, t1, c1);
 

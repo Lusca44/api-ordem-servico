@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.lucas.orderService.domain.Tecnico;
 import com.lucas.orderService.dtos.TecnicoDTO;
 import com.lucas.orderService.repository.TecnicoRepository;
+import com.lucas.orderService.services.exceptions.DataIntegritiViolationException;
 import com.lucas.orderService.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -28,7 +29,18 @@ public class TecnicoService {
 	}
 	
 	public Tecnico create(TecnicoDTO objDTO) {
+		if(findByCPF(objDTO) != null) {
+			throw new DataIntegritiViolationException("CPF já cadastrado!");
+		}
 		return repo.save(new Tecnico(null, objDTO.getNome(), objDTO.getCpf(), objDTO.getTelefone()));
 	}
 	
+	
+	private Tecnico findByCPF(TecnicoDTO objDTO) {
+		Tecnico obj = repo.findByCPF(objDTO.getCpf());
+		if(obj != null) {
+			return obj;
+		}
+		return null;
+	}
 }
