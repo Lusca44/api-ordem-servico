@@ -3,6 +3,8 @@ package com.lucas.orderService.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +37,16 @@ public class TecnicoService {
 		return repo.save(new Tecnico(null, objDTO.getNome(), objDTO.getCpf(), objDTO.getTelefone()));
 	}
 	
+	public Tecnico update(Integer id, @Valid TecnicoDTO objDTO) {
+		Tecnico oldObj = findById(id);
+		if(findByCPF(objDTO) != null && findByCPF(objDTO).getId() != id) {
+			throw new DataIntegritiViolationException("CPF já cadastrado!");
+		}
+		oldObj.setNome(objDTO.getNome());
+		oldObj.setCpf(objDTO.getCpf());
+		oldObj.setTelefone(objDTO.getTelefone());
+		return repo.save(oldObj);
+	}
 	
 	private Tecnico findByCPF(TecnicoDTO objDTO) {
 		Tecnico obj = repo.findByCPF(objDTO.getCpf());
@@ -43,4 +55,5 @@ public class TecnicoService {
 		}
 		return null;
 	}
+
 }
