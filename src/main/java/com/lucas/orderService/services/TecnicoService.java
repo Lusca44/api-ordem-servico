@@ -47,6 +47,14 @@ public class TecnicoService {
 		oldObj.setTelefone(objDTO.getTelefone());
 		return repo.save(oldObj);
 	}
+
+	public void deleteById(Integer id) {
+		Tecnico obj = findById(id);
+		if(obj.getOrdermServico().size() > 0) {
+			throw new DataIntegritiViolationException("Tecnico tem ordens de servico. Não pode ser deletado!");
+		}
+		repo.deleteById(id);
+	}
 	
 	private Tecnico findByCPF(TecnicoDTO objDTO) {
 		Tecnico obj = repo.findByCPF(objDTO.getCpf());
@@ -55,5 +63,6 @@ public class TecnicoService {
 		}
 		return null;
 	}
+
 
 }
