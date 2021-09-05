@@ -3,6 +3,8 @@ package com.lucas.orderService.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,7 +40,24 @@ public class ClienteService {
 		}
 		return repo.save(fromDTO(new Cliente(), objDTO));
 	}
+	
+	public Cliente update(Integer id, @Valid ClienteDTO objDTO) {
+		Cliente updateObj = findById(id);
+		if(findByCPF(objDTO) != null && findByCPF(objDTO).getId() != id) {
+			throw new DataIntegritiViolationException("CPF Já cadastrado!!");
+		}
+		fromDTO(updateObj, objDTO);
+		return repo.save(updateObj);
+	}
 
+	public void deleteById(Integer id) {
+		Cliente obj = findById(id);
+		if(obj.getOrdemServico().size() > 0) {
+			throw new DataIntegritiViolationException("O cliente não pode ser excluido enquanto estiver ligado a ordens de serviço");
+		}
+		repo.deleteById(id);
+	}
+	
 	private Pessoa findByCPF(ClienteDTO objDTO) {
 		Pessoa obj = pessoaRepo.findByCPF(objDTO.getCpf());
 		if(obj != null) {
