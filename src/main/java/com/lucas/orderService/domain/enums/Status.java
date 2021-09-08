@@ -12,7 +12,7 @@ public enum Status {
 		this.descricao = descricao;
 	}
 
-	public int getCode() {
+	public Integer getCode() {
 		return code;
 	}
 

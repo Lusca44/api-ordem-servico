@@ -3,15 +3,23 @@ package com.lucas.orderService.dtos;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import javax.validation.constraints.NotEmpty;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.lucas.orderService.domain.OrdemServico;
 
 public class OrdemServicoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
+	@JsonFormat(pattern = "dd/MM/yyy HH:mm")
 	private LocalDateTime dataAbertura;
+
+	@JsonFormat(pattern = "dd/MM/yyy HH:mm")
 	private LocalDateTime dataFechamento;
 	private Integer prioridade;
+
+	@NotEmpty(message = "O campo Observações é requerido!!")
 	private String observacoes;
 	private Integer status;
 	private Integer tecnico;
