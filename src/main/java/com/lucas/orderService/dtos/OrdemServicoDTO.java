@@ -7,6 +7,8 @@ import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.lucas.orderService.domain.OrdemServico;
+import com.lucas.orderService.domain.enums.Prioridade;
+import com.lucas.orderService.domain.enums.Status;
 
 public class OrdemServicoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -65,8 +67,8 @@ public class OrdemServicoDTO implements Serializable {
 		this.dataFechamento = dataFechamento;
 	}
 
-	public Integer getPrioridade() {
-		return prioridade;
+	public Prioridade getPrioridade() {
+		return Prioridade.toEnum(this.prioridade);
 	}
 
 	public void setPrioridade(Integer prioridade) {
@@ -81,8 +83,8 @@ public class OrdemServicoDTO implements Serializable {
 		this.observacoes = observacoes;
 	}
 
-	public Integer getStatus() {
-		return status;
+	public Status getStatus() {
+		return Status.toEnum(this.status);
 	}
 
 	public void setStatus(Integer status) {

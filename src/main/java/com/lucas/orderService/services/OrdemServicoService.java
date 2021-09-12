@@ -55,8 +55,8 @@ public class OrdemServicoService {
 	private OrdemServico fromDTO(OrdemServico obj, OrdemServicoDTO objDTO) {
 		obj.setId(objDTO.getId());
 		obj.setObservacoes(objDTO.getObservacoes());
-		obj.setPrioridade(Prioridade.toEnum(objDTO.getPrioridade()));
-		obj.setStatus(Status.toEnum(objDTO.getStatus()));
+		obj.setPrioridade(objDTO.getPrioridade());
+		obj.setStatus(objDTO.getStatus());
 		
 		Tecnico tecnico = tecnicoService.findById(objDTO.getTecnico());
 		Cliente cliente = clienteService.findById(objDTO.getCliente());
